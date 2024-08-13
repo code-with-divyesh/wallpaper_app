@@ -52,6 +52,33 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: 7, vertical: 20),
+                height: MediaQuery.of(context).size.height,
+                child: GridView.builder(
+                  physics: BouncingScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 10,
+                      mainAxisExtent: 400),
+                  itemCount: 6,
+                  itemBuilder: ((context, index) {
+                    return Container(
+                      height: 800,
+                      width: 50,
+                      color: Colors.yellow,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                            height: 800,
+                            width: 50,
+                            fit: BoxFit.cover,
+                            "https://images.pexels.com/photos/6307488/pexels-photo-6307488.jpeg?auto=compress&cs=tinysrgb&w=600"),
+                      ),
+                    );
+                  }),
+                )),
           ],
         ),
       ),
