@@ -11,12 +11,12 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       padding: EdgeInsets.symmetric(horizontal: 25),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 210, 202, 202),
         border: Border.all(color: Colors.black38),
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(18),
       ),
       child: Row(
         children: [
