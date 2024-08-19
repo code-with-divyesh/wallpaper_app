@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wallpaper_app/controller/wallpaperapi.dart';
+import 'package:wallpaper_app/model/model.dart';
 import 'package:wallpaper_app/views/widgets/CustomAppBar.dart';
 import 'package:wallpaper_app/views/widgets/catlog.dart';
 import 'package:wallpaper_app/views/widgets/customeSearchbar.dart';
@@ -14,13 +16,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> NavBarItem = [
-    "Nature and Landscapes",
-    "Minimalist and Abstract",
-    "Cityscapes and Architecture",
-    "Space and Astronomy",
-    "Fantasy and Sci-Fi",
-  ];
+  List<Photosmodel> trandingWallPaper = [];
+
+  getTrandingWallpaper() async {
+    trandingWallPaper = await ApiOP.getTrendingWallpaper('nature');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getTrandingWallpaper();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,27 +63,29 @@ class _HomeState extends State<Home> {
             ),
             Container(
                 margin: EdgeInsets.symmetric(horizontal: 7, vertical: 20),
-                height: MediaQuery.of(context).size.height,
+                height: 1000,
                 child: GridView.builder(
                   physics: BouncingScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      crossAxisSpacing: 8,
+                      crossAxisSpacing: 13,
                       mainAxisSpacing: 10,
                       mainAxisExtent: 400),
-                  itemCount: 6,
+                  itemCount: trandingWallPaper.length,
                   itemBuilder: ((context, index) {
                     return Container(
+                      decoration: BoxDecoration(
+                          color: Colors.yellow,
+                          borderRadius: BorderRadius.circular(15)),
                       height: 800,
                       width: 50,
-                      color: Colors.yellow,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                         child: Image.network(
                             height: 800,
                             width: 50,
                             fit: BoxFit.cover,
-                            "https://images.pexels.com/photos/6307488/pexels-photo-6307488.jpeg?auto=compress&cs=tinysrgb&w=600"),
+                            trandingWallPaper[index].imagsrc),
                       ),
                     );
                   }),
